@@ -1,7 +1,7 @@
 // Copyright (c) Giancarlo Maniscalco. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using irezhero.EntityModelBinder;
+using EntityModelBinder;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 

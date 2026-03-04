@@ -5,12 +5,14 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EntityModelBinder
 {
-    public class EntityModelBinder<T> : IModelBinder where T : class
+    public class EntityModelBinder<T>
+    : IModelBinder where T : class
     {
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
@@ -46,6 +48,8 @@ namespace EntityModelBinder
 
             var (columnName, keyType) = GetKeyInfo(bindingContext);
 
+            Console.WriteLine($"Binding entity of type {typeof(T).Name} using column '{columnName}' with value '{value}'");
+
             object keyValue;
             if (!TryConvertKeyValue(value, keyType, out keyValue, out var errorMessage))
             {
@@ -60,6 +64,17 @@ namespace EntityModelBinder
                 bindingContext.Result = ModelBindingResult.Failed();
                 return;
             }
+
+            // In this way we can suppress validation for the bound entity
+            // otherwise, if the model is defined like this:
+            // public string Name { get; set; }
+            // it will fail validation because the Name property is required by default and we don't want that
+            bindingContext.ModelState.ClearValidationState(bindingContext.ModelName);
+
+            bindingContext.ValidationState.Add(entity, new ValidationStateEntry
+            {
+                SuppressValidation = true
+            });
 
             bindingContext.Result = ModelBindingResult.Success(entity);
         }

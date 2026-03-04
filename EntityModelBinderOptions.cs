@@ -8,6 +8,7 @@ namespace EntityModelBinder
     public class EntityModelBinderOptions
     {
         public bool EnableSwaggerSchemaIds { get; set; } = false;
+        public bool SuppressModelStateInvalidFilter { get; set; } = false;
 
         public Action<MvcOptions>? ControllerConfiguration { get; set; }
     }

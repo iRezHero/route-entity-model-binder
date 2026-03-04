@@ -22,6 +22,14 @@ namespace EntityModelBinder
                 services.Configure(options.ControllerConfiguration);
             }
 
+            if (options.SuppressModelStateInvalidFilter)
+            {
+                services.AddControllers(options =>
+                {
+                    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+                });
+            }
+
             return services;
         }
     }

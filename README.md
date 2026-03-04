@@ -9,7 +9,7 @@ In RESTful APIs, you often need to fetch database entities based on route parame
 ## Installation
 
 ```bash
-dotnet add package irezhero.EntityModelBinder
+dotnet add package EntityModelBinder
 ```
 
 ## Quick Start
@@ -17,7 +17,7 @@ dotnet add package irezhero.EntityModelBinder
 ### 1. Implement `IEntity` on your database model
 
 ```csharp
-using irezhero.EntityModelBinder;
+using EntityModelBinder;
 
 public class Product : IEntity
 {
