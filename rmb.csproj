@@ -22,15 +22,12 @@
     <Copyright>Copyright © 2026 Giancarlo Maniscalco</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/iRezHero/rmb</PackageProjectUrl>
-
   </PropertyGroup>
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <None Include="LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
