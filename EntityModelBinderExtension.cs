@@ -1,10 +1,28 @@
+// Copyright (c) Giancarlo Maniscalco. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 
-public static class EntityModelBinderExtension
+namespace EntityModelBinder
 {
-    public static IServiceCollection AddEntityModelBinder(this IServiceCollection services, Action setupAction = null)
+    public static class EntityModelBinderExtensions
     {
-        // TODO: implement setupAction to allow configuration of the model binder if needed
-        return services;
+        public static IServiceCollection AddEntityModelBinder(
+            this IServiceCollection services,
+            Action<EntityModelBinderOptions>? configure = null)
+        {
+            var options = new EntityModelBinderOptions();
+            configure?.Invoke(options);
+
+            services.Insert(0, ServiceDescriptor.Singleton<IModelBinderProvider, EntityModelBinderProvider>());
+
+            if (options.ControllerConfiguration != null)
+            {
+                services.Configure(options.ControllerConfiguration);
+            }
+
+            return services;
+        }
     }
 }

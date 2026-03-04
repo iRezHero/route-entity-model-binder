@@ -1,11 +1,13 @@
+// Copyright (c) Giancarlo Maniscalco. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using irezhero.EntityModelBinder;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-namespace irezhero.Database.Utilities
+namespace EntityModelBinder
 {
-    public class EntityModelBinderProvider
-     : IModelBinderProvider
+    public class EntityModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder? GetBinder(ModelBinderProviderContext context)
         {
