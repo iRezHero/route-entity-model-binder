@@ -31,7 +31,11 @@ public class Product : IEntity
 ### 2. Register the service in your `Program.cs`
 
 ```csharp
-builder.Services.AddEntityModelBinder();
+builder.Services.AddEntityModelBinder<SomePostgresContext>(options =>
+{
+    options.EnableSwaggerSchemaIds = true;
+    options.SuppressModelStateInvalidFilter = true;
+});
 ```
 
 ### 3. Use in your API controllers
