@@ -4,10 +4,13 @@
 using EntityModelBinder;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EntityModelBinder
 {
-    public class EntityModelBinderProvider : IModelBinderProvider
+    public class EntityModelBinderProvider<TDatabaseContext>
+        : IModelBinderProvider where TDatabaseContext : class
     {
         public IModelBinder? GetBinder(ModelBinderProviderContext context)
         {

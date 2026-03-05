@@ -2,33 +2,36 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EntityModelBinder
 {
     public static class EntityModelBinderExtensions
     {
-        public static IServiceCollection AddEntityModelBinder(
+        public static IServiceCollection AddEntityModelBinder<TDatabaseContext>(
             this IServiceCollection services,
-            Action<EntityModelBinderOptions>? configure = null)
+            Action<EntityModelBinderOptions>? configure = null) where TDatabaseContext : DbContext
         {
-            var options = new EntityModelBinderOptions();
-            configure?.Invoke(options);
+            var configuration = new EntityModelBinderOptions();
+            configure?.Invoke(configuration);
 
-            services.Insert(0, ServiceDescriptor.Singleton<IModelBinderProvider, EntityModelBinderProvider>());
-
-            if (options.ControllerConfiguration != null)
+            if (configuration.ControllerConfiguration != null)
             {
-                services.Configure(options.ControllerConfiguration);
+                services.Configure(configuration.ControllerConfiguration);
             }
 
-            if (options.SuppressModelStateInvalidFilter)
+            services.AddScoped<DbContext, TDatabaseContext>();
+
+            services.AddControllers(options =>
             {
-                services.AddControllers(options =>
+                options.ModelBinderProviders.Insert(0, new EntityModelBinderProvider<TDatabaseContext>());
+
+                if (configuration.SuppressModelStateInvalidFilter)
                 {
                     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-                });
-            }
+                }
+            });
 
             return services;
         }

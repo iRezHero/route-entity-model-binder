@@ -22,7 +22,7 @@ namespace EntityModelBinder
             var httpContext = bindingContext.HttpContext;
             var services = httpContext.RequestServices;
 
-            var dbContext = services.GetRequiredService<DbContext>();
+            var dbContext = (DbContext)services.GetRequiredService<DbContext>();
             var dbSet = dbContext.Set<T>();
 
             var modelName = bindingContext.ModelName;
@@ -33,7 +33,6 @@ namespace EntityModelBinder
 
             if (valueProviderResult == ValueProviderResult.None)
             {
-                bindingContext.Result = ModelBindingResult.Failed();
                 return;
             }
 
@@ -42,13 +41,10 @@ namespace EntityModelBinder
 
             if (string.IsNullOrEmpty(value))
             {
-                bindingContext.Result = ModelBindingResult.Failed();
                 return;
             }
 
             var (columnName, keyType) = GetKeyInfo(bindingContext);
-
-            Console.WriteLine($"Binding entity of type {typeof(T).Name} using column '{columnName}' with value '{value}'");
 
             object keyValue;
             if (!TryConvertKeyValue(value, keyType, out keyValue, out var errorMessage))
@@ -64,17 +60,11 @@ namespace EntityModelBinder
                 bindingContext.Result = ModelBindingResult.Failed();
                 return;
             }
-
             // In this way we can suppress validation for the bound entity
             // otherwise, if the model is defined like this:
             // public string Name { get; set; }
             // it will fail validation because the Name property is required by default and we don't want that
             bindingContext.ModelState.ClearValidationState(bindingContext.ModelName);
-
-            bindingContext.ValidationState.Add(entity, new ValidationStateEntry
-            {
-                SuppressValidation = true
-            });
 
             bindingContext.Result = ModelBindingResult.Success(entity);
         }
