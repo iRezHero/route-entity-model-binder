@@ -21,9 +21,13 @@
     <Authors>Giancarlo Maniscalco</Authors>
     <Copyright>Copyright © 2026 Giancarlo Maniscalco</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/iRezHero/rmb</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/iRezHero/route-entity-model-binder</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/iRezHero/route-entity-model-binder</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
 
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +35,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <None Include="LICENSE" Pack="true" PackagePath="" />
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="images\icon.png" Pack="true" Visible="false" PackagePath="\" />
   </ItemGroup>
 
 </Project>
