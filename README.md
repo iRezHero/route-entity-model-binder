@@ -169,7 +169,7 @@ c.CustomSchemaIds(type => type.ToString());
 4. Determines the column type (`int`, `Guid`, or `string`)
 5. Queries the database using Entity Framework Core
 6. Returns the entity directly to your controller method
-7. Returns `404 Not Found` if the entity doesn't exist
+7. ~Returns `404 Not Found` if the entity doesn't exist~
 
 ## Requirements
 
