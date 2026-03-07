@@ -1,7 +1,7 @@
 # EntityModelBinder 🚀
-<img width="100" height="100" alt="icon" src="https://github.com/user-attachments/assets/39867b74-696e-4842-8057-6824d17fd9ca" />
-
 A Laravel-inspired Route Model Binder for ASP.NET Core. Automatically resolves database entities from route parameters, eliminating repetitive lookup code and streamlining your API controllers.
+
+<img height="300" alt="EntityModelBinder extended" src="https://github.com/user-attachments/assets/d59cf5e8-03f7-461a-83d4-98cae3294320" />
 
 ## Why EntityModelBinder?
 
@@ -181,3 +181,6 @@ c.CustomSchemaIds(type => type.ToString());
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
+
+<img width="100" height="100" alt="icon" src="https://github.com/user-attachments/assets/39867b74-696e-4842-8057-6824d17fd9ca" />
+
