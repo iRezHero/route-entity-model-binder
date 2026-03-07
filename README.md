@@ -1,4 +1,5 @@
 # EntityModelBinder 🚀
+<img width="2000" height="2000" alt="icon" src="https://github.com/user-attachments/assets/39867b74-696e-4842-8057-6824d17fd9ca" />
 
 A Laravel-inspired Route Model Binder for ASP.NET Core. Automatically resolves database entities from route parameters, eliminating repetitive lookup code and streamlining your API controllers.
 
